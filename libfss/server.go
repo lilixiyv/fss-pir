@@ -88,11 +88,9 @@ func (f Fss) EvaluatePF(serverNum byte, k FssKeyEq2P, x uint) int {
 		//fmt.Println(f.Out)
 	}
 	sFinal, _ := binary.Varint(sCurr[:8])
-	if serverNum == 0 {
-		return int(sFinal) + int(tCurr)*k.FinalCW
-	} else {
-		return -1 * (int(sFinal) + int(tCurr)*k.FinalCW)
-	}
+
+	return ((int(sFinal)+int(tCurr)*k.FinalCW)%2 + 2) % 2
+
 }
 
 // This is the 2-party FSS evaluation function for interval functions, i.e. <,> functions.
